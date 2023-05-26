@@ -1,0 +1,30 @@
+[shared-]
+	pmark="D:\KIP\ASMBOOK4\EXAMPL~1\CH17\expr16.asm" 28 1
+	version=3
+[debug-]
+	target="d:\kip\asmbook4\exampl~1\ch17\expr16.exe"
+	synonym=;D:\KIP\ASMBOOK4\EXAMPL~1\CH17
+	srcwin=vs1+ /a+b+c+l+s+t+
+[cv]
+	wndstate=0 0 0 0 0 0 0 0 0 0 0 0 0 0 -1
+	wndstate=1 80 8 0 1 0 0 0 0 0 0 0 0 0 -1
+	wndstate=2 34 8 33 1 0 0 0 0 0 0 0 0 0 -1
+	wndstate=3 60 24 0 1 0 1 0 0 0 27 8 0 0 -1
+	wndstate=4 67 9 3 12 0 0 0 0 0 0 0 0 0 -1
+	wndstate=5 67 8 0 18 0 0 0 0 0 0 0 0 0 -1
+	wndstate=6 67 8 3 21 0 0 0 0 0 0 0 0 0 -1
+	wndstate=7 19 24 60 1 0 1 0 0 0 0 0 0 0 -1
+	wndstate=8 78 6 0 26 0 1 0 0 0 0 0 0 0 -1
+	wndstate=9 79 7 0 26 1 1 0 1 0 2 0 0 0 -1
+	command=use auto
+	command=n10
+	screensize=43
+	command=oh+
+	command=ov+
+	command=oa+
+	command=oc+
+	command=of+
+	command=o3+
+	command=ollf   
+	tracespeed=250
+	callargs=1

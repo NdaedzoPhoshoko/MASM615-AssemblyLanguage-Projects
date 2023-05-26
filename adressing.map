@@ -1,0 +1,18 @@
+ adressing
+
+ Timestamp is 62b33467 (Wed Jun 22 17:25:27 2022)
+
+ Preferred load address is 00400000
+
+ Start         Length     Name                   Class
+ 0001:00000000 00001015H .text                   CODE
+ 0002:00000000 00000121H .rdata                  DATA
+ 0002:00000121 00000000H .edata                  DATA
+ 0003:00000000 00000104H .data                   DATA
+
+  Address         Publics by Value              Rva+Base     Lib:Object
+
+ 0001:00000013       _main@0                    00401013 f   adressing.obj
+
+ entry point at        0001:00000013
+

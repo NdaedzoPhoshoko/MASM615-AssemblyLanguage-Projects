@@ -1,0 +1,32 @@
+Instructions of how to run Assembly projects
+
+Author : Ndaedzo Clement Phoshoko
+Purpose: Steps on how to run assembly projects on notepad and cmd
+Date   : September,4, 2021
+
+( Make sure that you downloaded the masm615 file and relocated it to C: drive).
+
+1. Type your code on notepad/vs code or any other text editor( for this tutorial we will use notepad)
+2. Take the steps below...
+  (i) Save your file as a .asm file(example myProject.asm)
+  (ii) Make sure that you change the "save as type text doc" to All files
+  (iii) Save your file inside the masm615 folder
+3. open "command promt" from the windows search bar
+4. Having opened cmd type the following...
+   (i) type   👉 cd C:\masm615         (press ENTER)
+   (iii) type 👉 dir                   (press ENTER)
+
+5.Locate to the name of your project ending with .asm (example myProject.asm)
+6.If you sees the ptoject file then type the following...
+   (i) type   👉 make32 yourProjectName (example make32 myProject)        (press ENTER)
+   (ii) You shall see a group of details about date time and some files
+    There should be a new executable file with the same project name created in the masm615 folder, check it
+    If its there  (press enter) else repeat.
+   (iii) For execution, type the name of the project only (example myProject)   (press ENTER)
+
+.....TAH DAH.........Congrats!!!!!!
+
+(Note Antivirus apps miight prevent your execution, but you can stop i. If you get an incorrect pass, restart again from step 3).
+
+........................THANK YOU.........................                         
+ 

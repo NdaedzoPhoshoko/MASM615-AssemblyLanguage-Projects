@@ -1,0 +1,28 @@
+ julia
+
+ Timestamp is 63067815 (Wed Aug 24 21:12:21 2022)
+
+ Preferred load address is 00400000
+
+ Start         Length     Name                   Class
+ 0001:00000000 00001039H .text                   CODE
+ 0002:00000000 00000121H .rdata                  DATA
+ 0002:00000121 00000000H .edata                  DATA
+ 0003:00000000 00000109H .data                   DATA
+ 0004:00000000 00000014H .idata$2                DATA
+ 0004:00000014 00000014H .idata$3                DATA
+ 0004:00000028 00000030H .idata$4                DATA
+ 0004:00000058 00000030H .idata$5                DATA
+ 0004:00000088 0000011eH .idata$6                DATA
+
+  Address         Publics by Value              Rva+Base     Lib:Object
+
+ 0001:00000010       _main@0                    00401010 f   julia.obj
+ 0001:00000034       _ExitProcess@4             00401034 f   kernel32:KERNEL32.dll
+ 0004:00000000       __IMPORT_DESCRIPTOR_KERNEL32 00405000     kernel32:KERNEL32.dll
+ 0004:00000014       __NULL_IMPORT_DESCRIPTOR   00405014     kernel32:KERNEL32.dll
+ 0004:00000058       __imp__ExitProcess@4       00405058     kernel32:KERNEL32.dll
+ 0004:0000005c       \177KERNEL32_NULL_THUNK_DATA 0040505c     kernel32:KERNEL32.dll
+
+ entry point at        0001:00000010
+
