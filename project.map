@@ -1,6 +1,6 @@
- add
+ project
 
- Timestamp is 64ab0edb (Sun Jul 09 21:47:39 2023)
+ Timestamp is 64f61eb3 (Mon Sep 04 20:15:15 2023)
 
  Preferred load address is 00400000
 
@@ -18,7 +18,7 @@
 
   Address         Publics by Value              Rva+Base     Lib:Object
 
- 0001:00000010       _main@0                    00401010 f   add.obj
+ 0001:00000010       _main@0                    00401010 f   project.obj
  0001:00000034       _Clrscr@0                  00401034 f   irvine32:Irvine32.obj
  0001:000000f9       _Crlf@0                    004010f9 f   irvine32:Irvine32.obj
  0001:00000114       _Delay@0                   00401114 f   irvine32:Irvine32.obj

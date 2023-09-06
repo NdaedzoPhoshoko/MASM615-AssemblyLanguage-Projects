@@ -1,3 +1,5 @@
+
+
 TITLE How to use the OFFSET dir        (offset.asm)
 
 Include Irvine32.inc 

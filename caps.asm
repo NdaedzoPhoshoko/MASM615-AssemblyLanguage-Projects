@@ -10,7 +10,7 @@ main PROC
 
  mov ax,0040h 
     mov es,ax 
-    mov ax,0017h 
+    mov ax,0017h        ; ax=17h
     mov di,ax 
     or  byte [es:di],40h    ;  why are there erors  -> ES:Dİ 
 
@@ -23,3 +23,4 @@ main PROC
 exit
 main ENDP
 END main
+

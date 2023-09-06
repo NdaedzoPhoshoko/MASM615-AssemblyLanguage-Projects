@@ -1,4 +1,4 @@
-Microsoft (R) Macro Assembler Version 6.15.8803		    09/23/22 19:41:31
+Microsoft (R) Macro Assembler Version 6.15.8803		    07/21/23 15:26:09
 SUM                                     (sum.asm)	     Page 1 - 1
 
 
@@ -80,10 +80,6 @@ SUM                                     (sum.asm)	     Page 1 - 1
  00000042  A3 00000056 R	mov int1, eax                                ;collecting the user-32bit integer
  00000047  E8 00000000 E	call Crlf                                    ;new line
 
-
-
-				                      
-
  0000004C  BA 0000002E R	mov edx, OFFSET answer
  00000051  E8 00000000 E	call WriteString
  00000056  A1 00000056 R	mov eax, [int1]                              ;summation of two user-32bit integers
@@ -112,7 +108,7 @@ SUM                                     (sum.asm)	     Page 1 - 1
  00000084			main ENDP                                    ;end procedure main
 				END main
 
-Microsoft (R) Macro Assembler Version 6.15.8803		    09/23/22 19:41:31
+Microsoft (R) Macro Assembler Version 6.15.8803		    07/21/23 15:26:09
 SUM                                     (sum.asm)	     Symbols 2 - 1
 
 
