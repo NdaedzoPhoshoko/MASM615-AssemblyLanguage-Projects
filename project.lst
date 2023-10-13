@@ -1,10 +1,9 @@
-Microsoft (R) Macro Assembler Version 6.15.8803		    09/04/23 20:15:15
-program for      VAL1+(VAL2-VAL3)*VAL4                     (  Page 1 - 1
+Microsoft (R) Macro Assembler Version 6.15.8803		    10/09/23 19:49:17
+PushInOut       (pushInOut.asm)				     Page 1 - 1
 
 
-				TITLE        program for      VAL1+(VAL2-VAL3)*VAL4                     (project.asm)
-
-				INCLUDE irvine32.inc
+				TITLE PushInOut       (pushInOut.asm)
+				INCLUDE Irvine32.inc
 			      C ; Include file for Irvine32.lib             (Irvine32.inc)
 			      C 
 			      C ;OPTION CASEMAP:NONE		; optional: make identifiers case-sensitive
@@ -19,33 +18,57 @@ program for      VAL1+(VAL2-VAL3)*VAL4                     (  Page 1 - 1
 			      C 
 
  00000000			.data
-
- 00000000			.data?
+ 00000000 41 73 73 65 6D	aString BYTE "Assembly Language", 0
+	   62 6C 79 20 4C
+	   61 6E 67 75 61
+	   67 65 00
+ 00000012 52 65 76 65 72	msgStr BYTE "Reversed string is: ",0
+	   73 65 64 20 73
+	   74 72 69 6E 67
+	   20 69 73 3A 20
+	   00
 
  00000000			.code
  00000000			main PROC 
+				; Push string into the stack.
+ 00000000  B9 00000012		mov ecx, lengthof aString
+ 00000005  BA 00000000		mov edx, 0
+ 0000000A  B8 00000000		mov eax, 0
 
- 00000000  B8 0346680A		mov eax, 346680Ah
- 00000005  BB 035757AB		mov ebx, 35757ABh
- 0000000A  50			push eax
+ 0000000F			l1:   
+ 0000000F  0F B6 82		    movzx eax, [aString + edx]                ; Push on stack
+	   00000000 R
+ 00000016  50			    push eax
+ 00000017  66| 42		    inc dx
+ 00000019  E2 F4		    loop l1
 
- 0000000B  89 1C 24		mov [esp], ebx
- 0000000E  58			pop eax
- 0000000F  E8 00000000 E	call dumpregs
 
-				exit
- 00000014  6A 00	   *	    push   +000000000h
- 00000016  E8 00000000 E   *	    call   ExitProcess
- 0000001B			main ENDP
-				END main 
+ 0000001B  B9 00000012		mov ecx, lengthof aString    ; Pop the name from the stack, in reverse,  and store in the aString 
+ 00000020  B8 00000000		mov eax, 0
+ 00000025  BA 00000000		mov edx, 0
 
-				COMMENT p
-				please note that
-				        mul bl
-				simply means ax= al*bl
-				p
-Microsoft (R) Macro Assembler Version 6.15.8803		    09/04/23 20:15:15
-program for      VAL1+(VAL2-VAL3)*VAL4                     (  Symbols 2 - 1
+ 0000002A  58			l2:pop eax
+ 0000002B  88 82 00000000 R	        mov [aString + dx], al
+ 00000031  66| 42		        inc dx
+ 00000033  E2 F5		        loop l2
+
+ 00000035  BA 00000012 R	mov edx, offset msgStr                       ;display string
+ 0000003A  E8 00000000 E	call writeString
+ 0000003F  BA 00000000 R	mov edx, offset aString
+ 00000044  E8 00000000 E	call writeString
+
+				exit 
+ 00000049  6A 00	   *	    push   +000000000h
+ 0000004B  E8 00000000 E   *	    call   ExitProcess
+ 00000050			main ENDP
+				END main
+				    
+
+
+
+				    
+Microsoft (R) Macro Assembler Version 6.15.8803		    10/09/23 19:49:17
+PushInOut       (pushInOut.asm)				     Symbols 2 - 1
 
 
 
@@ -92,9 +115,8 @@ Segments and Groups:
 
 FLAT . . . . . . . . . . . . . .	GROUP
 STACK  . . . . . . . . . . . . .	32 Bit	 00001000 DWord	  Stack	  'STACK'	 
-_BSS . . . . . . . . . . . . . .	32 Bit	 00000000 DWord	  Public  'BSS'  
-_DATA  . . . . . . . . . . . . .	32 Bit	 00000000 DWord	  Public  'DATA'	
-_TEXT  . . . . . . . . . . . . .	32 Bit	 0000001B DWord	  Public  'CODE'	
+_DATA  . . . . . . . . . . . . .	32 Bit	 00000027 DWord	  Public  'DATA'	
+_TEXT  . . . . . . . . . . . . .	32 Bit	 00000050 DWord	  Public  'CODE'	
 
 
 Procedures,  parameters and locals:
@@ -176,7 +198,9 @@ WriteHexB  . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External
 WriteHex . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 WriteInt . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 WriteString  . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
-main . . . . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 0000001B Public STDCALL
+main . . . . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 00000050 Public STDCALL
+  l1 . . . . . . . . . . . . . .	L Near	 0000000F _TEXT	
+  l2 . . . . . . . . . . . . . .	L Near	 0000002A _TEXT	
 
 
 Symbols:
@@ -257,6 +281,7 @@ TRUNCATE_EXISTING  . . . . . . .	Number	 00000005h
 WINDOW_BUFFER_SIZE_EVENT . . . .	Number	 00000004h   
 WriteConsoleOutputCharacter  . .	Text   	 WriteConsoleOutputCharacterA
 WriteConsole . . . . . . . . . .	Text   	 WriteConsoleA
+aString  . . . . . . . . . . . .	Byte	 00000000 _DATA	
 black  . . . . . . . . . . . . .	Number	 00000000h   
 blue . . . . . . . . . . . . . .	Number	 00000001h   
 brown  . . . . . . . . . . . . .	Number	 00000006h   
@@ -271,6 +296,7 @@ lightGreen . . . . . . . . . . .	Number	 0000000Ah
 lightMagenta . . . . . . . . . .	Number	 0000000Dh   
 lightRed . . . . . . . . . . . .	Number	 0000000Ch   
 magenta  . . . . . . . . . . . .	Number	 00000005h   
+msgStr . . . . . . . . . . . . .	Byte	 00000012 _DATA	
 red  . . . . . . . . . . . . . .	Number	 00000004h   
 white  . . . . . . . . . . . . .	Number	 0000000Fh   
 yellow . . . . . . . . . . . . .	Number	 0000000Eh   

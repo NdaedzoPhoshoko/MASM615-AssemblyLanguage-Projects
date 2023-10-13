@@ -1,8 +1,8 @@
-TITLE Program involving the jumps and bolean expressions (myAssignment.asm)
+TITLE Program involving the jumps and bolean expressions (votingAssignment.asm)
 
-;Author: Unarine Nemangwela
-;Student no: 202110155
-;Date: 30 August 2022
+;Author: Ndaedzo Phoshoko
+;Student no: 202018636
+;Date: 18 September 2023
 
 INCLUDE IRVINE32.inc 
 
