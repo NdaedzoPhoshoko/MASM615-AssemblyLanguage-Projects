@@ -1,9 +1,10 @@
-Microsoft (R) Macro Assembler Version 6.15.8803		    10/09/23 19:49:17
-PushInOut       (pushInOut.asm)				     Page 1 - 1
+Microsoft (R) Macro Assembler Version 6.15.8803		    10/26/23 19:35:53
+testing (project.asm)					     Page 1 - 1
 
 
-				TITLE PushInOut       (pushInOut.asm)
-				INCLUDE Irvine32.inc
+				TITLE    testing (project.asm)
+
+				INCLUDE IRVINE32.INC 
 			      C ; Include file for Irvine32.lib             (Irvine32.inc)
 			      C 
 			      C ;OPTION CASEMAP:NONE		; optional: make identifiers case-sensitive
@@ -16,59 +17,37 @@ PushInOut       (pushInOut.asm)				     Page 1 - 1
 			      C .NOLIST
 			      C .LIST
 			      C 
-
  00000000			.data
- 00000000 41 73 73 65 6D	aString BYTE "Assembly Language", 0
-	   62 6C 79 20 4C
-	   61 6E 67 75 61
-	   67 65 00
- 00000012 52 65 76 65 72	msgStr BYTE "Reversed string is: ",0
-	   73 65 64 20 73
-	   74 72 69 6E 67
-	   20 69 73 3A 20
-	   00
-
+ 00000000 45 6E 74 65 72	promptAge BYTE "Enter age: ",0
+	   20 61 67 65 3A
+	   20 00
+ 0000000C 45 6C 69 67 69	printYes BYTE "Eligible",0
+	   62 6C 65 00
+ 00000015 4E 6F 74 20 45	printNo BYTE "Not Eligible",0
+	   6C 69 67 69 62
+	   6C 65 00
  00000000			.code
- 00000000			main PROC 
-				; Push string into the stack.
- 00000000  B9 00000012		mov ecx, lengthof aString
- 00000005  BA 00000000		mov edx, 0
- 0000000A  B8 00000000		mov eax, 0
+ 00000000			main proc
 
- 0000000F			l1:   
- 0000000F  0F B6 82		    movzx eax, [aString + edx]                ; Push on stack
-	   00000000 R
- 00000016  50			    push eax
- 00000017  66| 42		    inc dx
- 00000019  E2 F4		    loop l1
-
-
- 0000001B  B9 00000012		mov ecx, lengthof aString    ; Pop the name from the stack, in reverse,  and store in the aString 
- 00000020  B8 00000000		mov eax, 0
- 00000025  BA 00000000		mov edx, 0
-
- 0000002A  58			l2:pop eax
- 0000002B  88 82 00000000 R	        mov [aString + dx], al
- 00000031  66| 42		        inc dx
- 00000033  E2 F5		        loop l2
-
- 00000035  BA 00000012 R	mov edx, offset msgStr                       ;display string
- 0000003A  E8 00000000 E	call writeString
- 0000003F  BA 00000000 R	mov edx, offset aString
- 00000044  E8 00000000 E	call writeString
-
-				exit 
- 00000049  6A 00	   *	    push   +000000000h
- 0000004B  E8 00000000 E   *	    call   ExitProcess
- 00000050			main ENDP
+ 00000000  BA 00000000 R	mov edx, OFFSET promptAge
+ 00000005  E8 00000000 E	call WriteString
+ 0000000A  E8 00000000 E	call ReadInt
+ 0000000F  E8 00000000 E	call Crlf
+ 00000014  3C 12		cmp al, 18d
+ 00000016  73 0C		jae L1
+ 00000018  BA 00000015 R	mov edx, OFFSET printNo
+ 0000001D  E8 00000000 E	call WriteString
+ 00000022  EB 0A		jmp L2
+ 00000024  BA 0000000C R	L1: mov edx, OFFSET printYes
+ 00000029  E8 00000000 E	    call WriteString
+ 0000002E			L2:
+				exit
+ 0000002E  6A 00	   *	    push   +000000000h
+ 00000030  E8 00000000 E   *	    call   ExitProcess
+ 00000035			main ENDP 
 				END main
-				    
-
-
-
-				    
-Microsoft (R) Macro Assembler Version 6.15.8803		    10/09/23 19:49:17
-PushInOut       (pushInOut.asm)				     Symbols 2 - 1
+Microsoft (R) Macro Assembler Version 6.15.8803		    10/26/23 19:35:53
+testing (project.asm)					     Symbols 2 - 1
 
 
 
@@ -115,8 +94,8 @@ Segments and Groups:
 
 FLAT . . . . . . . . . . . . . .	GROUP
 STACK  . . . . . . . . . . . . .	32 Bit	 00001000 DWord	  Stack	  'STACK'	 
-_DATA  . . . . . . . . . . . . .	32 Bit	 00000027 DWord	  Public  'DATA'	
-_TEXT  . . . . . . . . . . . . .	32 Bit	 00000050 DWord	  Public  'CODE'	
+_DATA  . . . . . . . . . . . . .	32 Bit	 00000022 DWord	  Public  'DATA'	
+_TEXT  . . . . . . . . . . . . .	32 Bit	 00000035 DWord	  Public  'CODE'	
 
 
 Procedures,  parameters and locals:
@@ -198,9 +177,9 @@ WriteHexB  . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External
 WriteHex . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 WriteInt . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 WriteString  . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
-main . . . . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 00000050 Public STDCALL
-  l1 . . . . . . . . . . . . . .	L Near	 0000000F _TEXT	
-  l2 . . . . . . . . . . . . . .	L Near	 0000002A _TEXT	
+main . . . . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 00000035 Public STDCALL
+  L1 . . . . . . . . . . . . . .	L Near	 00000024 _TEXT	
+  L2 . . . . . . . . . . . . . .	L Near	 0000002E _TEXT	
 
 
 Symbols:
@@ -281,7 +260,6 @@ TRUNCATE_EXISTING  . . . . . . .	Number	 00000005h
 WINDOW_BUFFER_SIZE_EVENT . . . .	Number	 00000004h   
 WriteConsoleOutputCharacter  . .	Text   	 WriteConsoleOutputCharacterA
 WriteConsole . . . . . . . . . .	Text   	 WriteConsoleA
-aString  . . . . . . . . . . . .	Byte	 00000000 _DATA	
 black  . . . . . . . . . . . . .	Number	 00000000h   
 blue . . . . . . . . . . . . . .	Number	 00000001h   
 brown  . . . . . . . . . . . . .	Number	 00000006h   
@@ -296,7 +274,9 @@ lightGreen . . . . . . . . . . .	Number	 0000000Ah
 lightMagenta . . . . . . . . . .	Number	 0000000Dh   
 lightRed . . . . . . . . . . . .	Number	 0000000Ch   
 magenta  . . . . . . . . . . . .	Number	 00000005h   
-msgStr . . . . . . . . . . . . .	Byte	 00000012 _DATA	
+printNo  . . . . . . . . . . . .	Byte	 00000015 _DATA	
+printYes . . . . . . . . . . . .	Byte	 0000000C _DATA	
+promptAge  . . . . . . . . . . .	Byte	 00000000 _DATA	
 red  . . . . . . . . . . . . . .	Number	 00000004h   
 white  . . . . . . . . . . . . .	Number	 0000000Fh   
 yellow . . . . . . . . . . . . .	Number	 0000000Eh   
