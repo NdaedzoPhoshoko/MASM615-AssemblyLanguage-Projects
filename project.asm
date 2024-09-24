@@ -1,24 +1,22 @@
-TITLE    testing (project.asm)
+TITLE Project for tester      (project.asm)
 
-INCLUDE IRVINE32.INC 
+
+INCLUDE IRVINE32.INC
+
 .data
-promptAge BYTE "Enter age: ",0
-printYes BYTE "Eligible",0
-printNo BYTE "Not Eligible",0
-.code
-main proc
 
-mov edx, OFFSET promptAge
-call WriteString
-call ReadInt
-cmp al, 18d
-jae L1
-mov edx, OFFSET printNo
-call WriteString
-jmp L2
-L1: mov edx, OFFSET printYes
-    call WriteString
-L2:
+.code 
+main PROC 
+
+mov eax, 0
+mov ebx, 0
+mov ecx, 0
+
+mov al, 0d4h
+rol al, 1
+
+call dumpregs
+
 exit
-main ENDP 
+main ENDP
 END main

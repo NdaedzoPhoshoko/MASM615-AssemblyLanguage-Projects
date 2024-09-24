@@ -1,14 +1,14 @@
-Microsoft (R) Macro Assembler Version 6.15.8803		    07/10/24 22:14:40
-SUM                                     (sum.asm)	     Page 1 - 1
+Microsoft (R) Macro Assembler Version 6.15.8803		    09/16/24 22:15:01
+Program involving the jumps and bolean expressions (vote.asm  Page 1 - 1
 
 
-				TITLE SUM                                     (sum.asm)
+				TITLE Program involving the jumps and bolean expressions (vote.asm)
 
-				;Program: Sum of two integers, using clear screen and procedures
-				;Author : Unarine Nemangwela
-				;Date   : 23 August 2022
+				;Author: Ndaedzo Phoshoko
+				;Student no: 202018***
+				;Date: 16 September 2024
 
-				INCLUDE Irvine32.inc
+				INCLUDE IRVINE32.inc 
 			      C ; Include file for Irvine32.lib             (Irvine32.inc)
 			      C 
 			      C ;OPTION CASEMAP:NONE		; optional: make identifiers case-sensitive
@@ -22,94 +22,82 @@ SUM                                     (sum.asm)	     Page 1 - 1
 			      C .LIST
 			      C 
 
- 00000000			.data
-
- 00000000 45 6E 74 65 72	string1 BYTE "Enter the integer 1 : ",0
-	   20 74 68 65 20
-	   69 6E 74 65 67
-	   65 72 20 31 20
+ 00000000			.data                                  ;initialized labels
+ 00000000 45 6E 74 65 72	nameMsg BYTE "Enter your name: ",0
+	   20 79 6F 75 72
+	   20 6E 61 6D 65
 	   3A 20 00
- 00000017 45 6E 74 65 72	string2 BYTE "Enter the integer 2 : ",0      ;messages to show
-	   20 74 68 65 20
-	   69 6E 74 65 67
-	   65 72 20 32 20
-	   3A 20 00
- 0000002E 2C 20 79 6F 75	answer  BYTE ", your sum is : ",0
-	   72 20 73 75 6D
-	   20 69 73 20 3A
+ 00000012 45 6E 74 65 72	ageMsg BYTE "Enter your age: ",0
+	   20 79 6F 75 72
+	   20 61 67 65 3A
 	   20 00
- 0000003F 77 61 69 74 20	loadMsg BYTE "wait system loading...",0
-	   73 79 73 74 65
-	   6D 20 6C 6F 61
-	   64 69 6E 67 2E
-	   2E 2E 00
- 00000056 00000000		int1    DWORD ?                              ;labels for string user integer
- 0000005A 00000000		int2    DWORD ?
+ 00000023  00000014 [		userName BYTE 20 DUP(0),0
+	    00
+	   ] 00
+ 00000038 2C 20 79 6F 75	votingMsg BYTE ", you are eligible to vote.",0
+	   20 61 72 65 20
+	   65 6C 69 67 69
+	   62 6C 65 20 74
+	   6F 20 76 6F 74
+	   65 2E 00
+ 00000054 2C 20 79 6F 75	notVotingMsg BYTE ", you are not eligible to vote.",0
+	   20 61 72 65 20
+	   6E 6F 74 20 65
+	   6C 69 67 69 62
+	   6C 65 20 74 6F
+	   20 76 6F 74 65
+	   2E 00
 
- 00000000			.code
+ 00000000			.data?                                 ;uninitialized labels
+ 00000000 00000000		age DWORD ?
 
- 00000000			locateCursor PROC                            ;procedure for locating the cursor allignment
+ 00000000			.code                                  ;procedures
 
- 00000000  B6 18		mov dh, 24                                   ;y-coordinate
- 00000002  B2 28		mov dl, 40                                   ;x-coordinate
- 00000004  E8 00000000 E	call gotoXY                                  ;call for x-and y- coordinates for cursor
+ 00000000			isAllowed PROC                      ;display that the user is allowed to vote
+ 00000000  BA 00000038 R	mov edx, OFFSET votingMsg
+ 00000005  E8 00000000 E	call writeString
+ 0000000A  C3			ret
+ 0000000B			isAllowed ENDP
 
- 00000009  C3			ret
- 0000000A			locateCursor ENDP
+ 0000000B			isNotAllowed PROC                      ;display that the user is not allowed to vot
+ 0000000B  BA 00000054 R	mov edx, OFFSET notVotingMsg
+ 00000010  E8 00000000 E	call writeString
+ 00000015  C3			ret
+ 00000016			isNotAllowed ENDP
 
+ 00000016			main PROC
 
+ 00000016  E8 00000000 E	call ClrScr
+ 0000001B  BA 00000000 R	mov edx, OFFSET nameMsg            ; collect name and age
+ 00000020  E8 00000000 E	call writeString
+ 00000025  BA 00000023 R	mov edx, OFFSET userName
+ 0000002A  B9 00000015		mov ecx, SIZEOF userName
+ 0000002F  E8 00000000 E	call readString
 
- 0000000A			delayAndClearScreen PROC                     ;a procedure for delay
+ 00000034  E8 00000000 E	call Crlf
+ 00000039  BA 00000012 R	mov edx, OFFSET ageMsg
+ 0000003E  E8 00000000 E	call writeString
+ 00000043  E8 00000000 E	call readInt
+ 00000048  A3 00000000 R	mov age, eax
+ 0000004D  E8 00000000 E	call Crlf
 
- 0000000A  E8 00000000 E	call Crlf
- 0000000F  E8 00000000 E	call Crlf
- 00000014  BA 0000003F R	mov edx, OFFSET loadMsg                      ;print out "system loading...."
- 00000019  E8 00000000 E	call WriteString
- 0000001E  B8 00001388		mov eax, 5000
- 00000023  E8 00000000 E	call delay                                   ;pause the console for 5 seconds. (1000 ms = 1s)
- 00000028  E8 00000000 E	call ClrScr                                  ;clear screen
- 0000002D  C3			ret
- 0000002E			delayAndClearScreen ENDP
+ 00000052  BA 00000023 R	mov edx, OFFSET userName
+ 00000057  E8 00000000 E	call writeString
+ 0000005C  83 3D 00000000 R	cmp age, 18                       ;jump to isAllowed if age>=18
+	   12
+ 00000063  7D 9B		jge isAllowed
 
- 0000002E			sumOfIntegers PROC                           ;a procedure for summing the two integers
-
- 0000002E  E8 00000000 E	call Crlf                                    ;new line
- 00000033  BA 00000000 R	mov edx, OFFSET string1                      ;storing the address of string1 into reg edx
- 00000038  E8 00000000 E	call WriteString                             ;printing the string1 asking for integer
- 0000003D  E8 00000000 E	call ReadInt                                 ;reading a value
- 00000042  A3 00000056 R	mov int1, eax                                ;collecting the user-32bit integer
- 00000047  E8 00000000 E	call Crlf                                    ;new line
-
- 0000004C  BA 0000002E R	mov edx, OFFSET answer
- 00000051  E8 00000000 E	call WriteString
- 00000056  A1 00000056 R	mov eax, [int1]                              ;summation of two user-32bit integers
- 0000005B  03 05 0000005A R	add eax, [int2]
- 00000061  E8 00000000 E	call WriteInt
-
- 00000066  E8 FFFFFF9F		call delayAndClearScreen                     ;wait for few seconds after printing sum before clear screen
-
- 0000006B  C3			ret
- 0000006C			sumOfIntegers ENDP
-
- 0000006C			main PROC                                    ;a procedure called main
-
- 0000006C  E8 00000000 E	call ClrScr                                  ;clear screen
-				;call sumOfIntegers                           ;call the procedure sumOfIntegers 1st time
-				;call sumOfIntegers                           ;||             ||                2nd time
-				;call sumOfIntegers                           ;||             ||                3rd time
- 00000071  B9 00000003		mov ecx, 3
- 00000076			L1:
- 00000076  E8 FFFFFFB3		   call sumOfIntegers
- 0000007B  E2 F9		   loop L1
+ 00000065  83 3D 00000000 R	cmp age, 18                       ;jump to isNotAllowed if age<18
+	   12
+ 0000006C  7C 9D		jL isNotAllowed
 
 				exit
- 0000007D  6A 00	   *	    push   +000000000h
- 0000007F  E8 00000000 E   *	    call   ExitProcess
- 00000084			main ENDP                                    ;end procedure main
+ 0000006E  6A 00	   *	    push   +000000000h
+ 00000070  E8 00000000 E   *	    call   ExitProcess
+ 00000075			main ENDP
 				END main
-
-Microsoft (R) Macro Assembler Version 6.15.8803		    07/10/24 22:14:40
-SUM                                     (sum.asm)	     Symbols 2 - 1
+Microsoft (R) Macro Assembler Version 6.15.8803		    09/16/24 22:15:01
+Program involving the jumps and bolean expressions (vote.asm  Symbols 2 - 1
 
 
 
@@ -156,8 +144,9 @@ Segments and Groups:
 
 FLAT . . . . . . . . . . . . . .	GROUP
 STACK  . . . . . . . . . . . . .	32 Bit	 00001000 DWord	  Stack	  'STACK'	 
-_DATA  . . . . . . . . . . . . .	32 Bit	 0000005E DWord	  Public  'DATA'	
-_TEXT  . . . . . . . . . . . . .	32 Bit	 00000084 DWord	  Public  'CODE'	
+_BSS . . . . . . . . . . . . . .	32 Bit	 00000004 DWord	  Public  'BSS'  
+_DATA  . . . . . . . . . . . . .	32 Bit	 00000074 DWord	  Public  'DATA'	
+_TEXT  . . . . . . . . . . . . .	32 Bit	 00000075 DWord	  Public  'CODE'	
 
 
 Procedures,  parameters and locals:
@@ -239,11 +228,9 @@ WriteHexB  . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External
 WriteHex . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 WriteInt . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 WriteString  . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
-delayAndClearScreen  . . . . . .	P Near	 0000000A _TEXT	Length= 00000024 Public STDCALL
-locateCursor . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 0000000A Public STDCALL
-main . . . . . . . . . . . . . .	P Near	 0000006C _TEXT	Length= 00000018 Public STDCALL
-  L1 . . . . . . . . . . . . . .	L Near	 00000076 _TEXT	
-sumOfIntegers  . . . . . . . . .	P Near	 0000002E _TEXT	Length= 0000003E Public STDCALL
+isAllowed  . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 0000000B Public STDCALL
+isNotAllowed . . . . . . . . . .	P Near	 0000000B _TEXT	Length= 0000000B Public STDCALL
+main . . . . . . . . . . . . . .	P Near	 00000016 _TEXT	Length= 0000005F Public STDCALL
 
 
 Symbols:
@@ -324,7 +311,8 @@ TRUNCATE_EXISTING  . . . . . . .	Number	 00000005h
 WINDOW_BUFFER_SIZE_EVENT . . . .	Number	 00000004h   
 WriteConsoleOutputCharacter  . .	Text   	 WriteConsoleOutputCharacterA
 WriteConsole . . . . . . . . . .	Text   	 WriteConsoleA
-answer . . . . . . . . . . . . .	Byte	 0000002E _DATA	
+ageMsg . . . . . . . . . . . . .	Byte	 00000012 _DATA	
+age  . . . . . . . . . . . . . .	DWord	 00000000 _BSS	
 black  . . . . . . . . . . . . .	Number	 00000000h   
 blue . . . . . . . . . . . . . .	Number	 00000001h   
 brown  . . . . . . . . . . . . .	Number	 00000006h   
@@ -332,19 +320,18 @@ cyan . . . . . . . . . . . . . .	Number	 00000003h
 exit . . . . . . . . . . . . . .	Text   	 INVOKE ExitProcess,0
 gray . . . . . . . . . . . . . .	Number	 00000008h   
 green  . . . . . . . . . . . . .	Number	 00000002h   
-int1 . . . . . . . . . . . . . .	DWord	 00000056 _DATA	
-int2 . . . . . . . . . . . . . .	DWord	 0000005A _DATA	
 lightBlue  . . . . . . . . . . .	Number	 00000009h   
 lightCyan  . . . . . . . . . . .	Number	 0000000Bh   
 lightGray  . . . . . . . . . . .	Number	 00000007h   
 lightGreen . . . . . . . . . . .	Number	 0000000Ah   
 lightMagenta . . . . . . . . . .	Number	 0000000Dh   
 lightRed . . . . . . . . . . . .	Number	 0000000Ch   
-loadMsg  . . . . . . . . . . . .	Byte	 0000003F _DATA	
 magenta  . . . . . . . . . . . .	Number	 00000005h   
+nameMsg  . . . . . . . . . . . .	Byte	 00000000 _DATA	
+notVotingMsg . . . . . . . . . .	Byte	 00000054 _DATA	
 red  . . . . . . . . . . . . . .	Number	 00000004h   
-string1  . . . . . . . . . . . .	Byte	 00000000 _DATA	
-string2  . . . . . . . . . . . .	Byte	 00000017 _DATA	
+userName . . . . . . . . . . . .	Byte	 00000023 _DATA	
+votingMsg  . . . . . . . . . . .	Byte	 00000038 _DATA	
 white  . . . . . . . . . . . . .	Number	 0000000Fh   
 yellow . . . . . . . . . . . . .	Number	 0000000Eh   
 

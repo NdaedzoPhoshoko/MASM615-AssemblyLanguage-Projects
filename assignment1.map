@@ -1,6 +1,6 @@
- assignment1
+ Assignment1
 
- Timestamp is 64c1763f (Wed Jul 26 21:38:39 2023)
+ Timestamp is 668ef674 (Wed Jul 10 23:00:36 2024)
 
  Preferred load address is 00400000
 
@@ -18,11 +18,11 @@
 
   Address         Publics by Value              Rva+Base     Lib:Object
 
- 0001:00000038       _userName@0                00401038 f   assignment1.obj
- 0001:0000005b       _ageProcedure@0            0040105b f   assignment1.obj
- 0001:00000079       _summation@0               00401079 f   assignment1.obj
- 0001:00000117       _systemLoading@0           00401117 f   assignment1.obj
- 0001:00000131       _main@0                    00401131 f   assignment1.obj
+ 0001:00000038       _userName@0                00401038 f   Assignment1.obj
+ 0001:0000005b       _ageProcedure@0            0040105b f   Assignment1.obj
+ 0001:00000079       _summation@0               00401079 f   Assignment1.obj
+ 0001:00000117       _systemLoading@0           00401117 f   Assignment1.obj
+ 0001:00000131       _main@0                    00401131 f   Assignment1.obj
  0001:000001a8       _Clrscr@0                  004011a8 f   irvine32:Irvine32.obj
  0001:0000026d       _Crlf@0                    0040126d f   irvine32:Irvine32.obj
  0001:00000288       _Delay@0                   00401288 f   irvine32:Irvine32.obj

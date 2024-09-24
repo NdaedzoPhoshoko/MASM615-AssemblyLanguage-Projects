@@ -1,4 +1,4 @@
-Microsoft (R) Macro Assembler Version 6.15.8803		    06/22/22 17:25:27
+Microsoft (R) Macro Assembler Version 6.15.8803		    08/03/24 09:43:34
 How to manipulate addresses of labels  (addressing.asm)	     Page 1 - 1
 
 
@@ -34,7 +34,7 @@ How to manipulate addresses of labels  (addressing.asm)	     Page 1 - 1
 
  00000006			main ENDP
 				END main
-Microsoft (R) Macro Assembler Version 6.15.8803		    06/22/22 17:25:27
+Microsoft (R) Macro Assembler Version 6.15.8803		    08/03/24 09:43:34
 How to manipulate addresses of labels  (addressing.asm)	     Symbols 2 - 1
 
 

@@ -1,10 +1,11 @@
-Microsoft (R) Macro Assembler Version 6.15.8803		    10/26/23 19:35:53
-testing (project.asm)					     Page 1 - 1
+Microsoft (R) Macro Assembler Version 6.15.8803		    09/20/24 20:03:30
+Project for tester      (project.asm)			     Page 1 - 1
 
 
-				TITLE    testing (project.asm)
+				TITLE Project for tester      (project.asm)
 
-				INCLUDE IRVINE32.INC 
+
+				INCLUDE IRVINE32.INC
 			      C ; Include file for Irvine32.lib             (Irvine32.inc)
 			      C 
 			      C ;OPTION CASEMAP:NONE		; optional: make identifiers case-sensitive
@@ -17,37 +18,28 @@ testing (project.asm)					     Page 1 - 1
 			      C .NOLIST
 			      C .LIST
 			      C 
- 00000000			.data
- 00000000 45 6E 74 65 72	promptAge BYTE "Enter age: ",0
-	   20 61 67 65 3A
-	   20 00
- 0000000C 45 6C 69 67 69	printYes BYTE "Eligible",0
-	   62 6C 65 00
- 00000015 4E 6F 74 20 45	printNo BYTE "Not Eligible",0
-	   6C 69 67 69 62
-	   6C 65 00
- 00000000			.code
- 00000000			main proc
 
- 00000000  BA 00000000 R	mov edx, OFFSET promptAge
- 00000005  E8 00000000 E	call WriteString
- 0000000A  E8 00000000 E	call ReadInt
- 0000000F  E8 00000000 E	call Crlf
- 00000014  3C 12		cmp al, 18d
- 00000016  73 0C		jae L1
- 00000018  BA 00000015 R	mov edx, OFFSET printNo
- 0000001D  E8 00000000 E	call WriteString
- 00000022  EB 0A		jmp L2
- 00000024  BA 0000000C R	L1: mov edx, OFFSET printYes
- 00000029  E8 00000000 E	    call WriteString
- 0000002E			L2:
+ 00000000			.data
+
+ 00000000			.code 
+ 00000000			main PROC 
+
+ 00000000  B8 00000000		mov eax, 0
+ 00000005  BB 00000000		mov ebx, 0
+ 0000000A  B9 00000000		mov ecx, 0
+
+ 0000000F  B0 D4		mov al, 0d4h
+ 00000011  D0 C0		rol al, 1
+
+ 00000013  E8 00000000 E	call dumpregs
+
 				exit
- 0000002E  6A 00	   *	    push   +000000000h
- 00000030  E8 00000000 E   *	    call   ExitProcess
- 00000035			main ENDP 
+ 00000018  6A 00	   *	    push   +000000000h
+ 0000001A  E8 00000000 E   *	    call   ExitProcess
+ 0000001F			main ENDP
 				END main
-Microsoft (R) Macro Assembler Version 6.15.8803		    10/26/23 19:35:53
-testing (project.asm)					     Symbols 2 - 1
+Microsoft (R) Macro Assembler Version 6.15.8803		    09/20/24 20:03:30
+Project for tester      (project.asm)			     Symbols 2 - 1
 
 
 
@@ -94,8 +86,8 @@ Segments and Groups:
 
 FLAT . . . . . . . . . . . . . .	GROUP
 STACK  . . . . . . . . . . . . .	32 Bit	 00001000 DWord	  Stack	  'STACK'	 
-_DATA  . . . . . . . . . . . . .	32 Bit	 00000022 DWord	  Public  'DATA'	
-_TEXT  . . . . . . . . . . . . .	32 Bit	 00000035 DWord	  Public  'CODE'	
+_DATA  . . . . . . . . . . . . .	32 Bit	 00000000 DWord	  Public  'DATA'	
+_TEXT  . . . . . . . . . . . . .	32 Bit	 0000001F DWord	  Public  'CODE'	
 
 
 Procedures,  parameters and locals:
@@ -177,9 +169,7 @@ WriteHexB  . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External
 WriteHex . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 WriteInt . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 WriteString  . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
-main . . . . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 00000035 Public STDCALL
-  L1 . . . . . . . . . . . . . .	L Near	 00000024 _TEXT	
-  L2 . . . . . . . . . . . . . .	L Near	 0000002E _TEXT	
+main . . . . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 0000001F Public STDCALL
 
 
 Symbols:
@@ -274,9 +264,6 @@ lightGreen . . . . . . . . . . .	Number	 0000000Ah
 lightMagenta . . . . . . . . . .	Number	 0000000Dh   
 lightRed . . . . . . . . . . . .	Number	 0000000Ch   
 magenta  . . . . . . . . . . . .	Number	 00000005h   
-printNo  . . . . . . . . . . . .	Byte	 00000015 _DATA	
-printYes . . . . . . . . . . . .	Byte	 0000000C _DATA	
-promptAge  . . . . . . . . . . .	Byte	 00000000 _DATA	
 red  . . . . . . . . . . . . . .	Number	 00000004h   
 white  . . . . . . . . . . . . .	Number	 0000000Fh   
 yellow . . . . . . . . . . . . .	Number	 0000000Eh   
